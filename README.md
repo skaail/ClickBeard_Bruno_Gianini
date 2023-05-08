@@ -26,4 +26,3 @@ npm start
 
 "o aplicativo está rodando na porta 3000 do hosto local"
 ```
-![Alt text](relative%20path/to/Modelo Do Banco De Dados.png?raw=true "Title")
