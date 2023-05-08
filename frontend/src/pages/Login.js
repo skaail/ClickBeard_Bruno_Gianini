@@ -31,7 +31,6 @@ function Login({setToken}) {
     if(token.auth){
       setToken(token.token)
       localStorage.setItem('token', JSON.stringify(token.token))
-      localStorage.setItem('role', JSON.stringify(token.role))
     }
   }
 
