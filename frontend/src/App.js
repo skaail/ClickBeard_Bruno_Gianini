@@ -14,8 +14,8 @@ function App() {
 
 
   useEffect(() => {
-    const tokenString = localStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
+    const tokenString = localStorage.getItem('token')
+    const userToken = JSON.parse(tokenString)
 
     setToken(userToken)
   }, []);
