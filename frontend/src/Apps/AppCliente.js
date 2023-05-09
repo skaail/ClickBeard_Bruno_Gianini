@@ -11,7 +11,6 @@ function AppCliente() {
         <BrowserRouter className="Layout">
         <Sidebar>
           <Menu>
-            <Link to='/'><MenuItem>Home</MenuItem></Link>
             <Link to='/agendamentos'><MenuItem>Agendar</MenuItem></Link>
           </Menu>
         </Sidebar>

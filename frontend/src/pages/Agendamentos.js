@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { FormControl, Select, Button } from '@chakra-ui/react'
+import { FormControl, Select, Button, FormLabel } from '@chakra-ui/react'
 import DateTimePicker from 'react-datetime-picker';
+
+import './agendamento.css';
 
 import jwt_decode from "jwt-decode";
 
@@ -15,6 +17,7 @@ const userToken = JSON.parse(tokenString);
 
 
 function Agendamentos() {
+
     const [data, setData] = useState([])
     const [especialidades, setEspecialidades] = useState([])
     const [error, setError] = useState(null)
@@ -51,10 +54,10 @@ function Agendamentos() {
         var formattedDate = format(date, "yyyy-MM-dd");
         var formattedHour = format(date, "HH:mm:ss")
 
+        setError('')
+
         var data = formattedDate
         var hora = formattedHour
-
-        console.log(data, barbeiro, hora, jwt_decode(userToken).role)
 
         const dataPost = new URLSearchParams();
 
@@ -74,7 +77,11 @@ function Agendamentos() {
       
         fetch('http://localhost:3001/api/verificar', requestOptions)
             .then(response => response.json())
-            .then(window.location.reload(false))
+            .then(data => {
+                if(data.message === 'Horário indisponível'){
+                    throw Error('a')
+                }
+            })
             .catch(err => {
                 setError(err.message)
             })
@@ -82,9 +89,10 @@ function Agendamentos() {
 
 
     return (
-        <div>
+        <div style={{display: 'flex', width: "100%", alignItems: 'flex-end', flexDirection: 'column'}}>
 
         <FormControl>
+            <FormLabel>Procedimento</FormLabel>
             <Select placeholder='Select option' onChange={(e) => onchange(e)}>
             {especialidades.map((data) => (
                 <option value={data.value}>{data.label}</option>
@@ -93,6 +101,7 @@ function Agendamentos() {
         </FormControl>
 
         <FormControl>
+            <FormLabel>Barbeiro</FormLabel>
             <Select placeholder='Select option' onChange={(e) => novoBarbeiro(e)}>
             {data.map((data) => (
                 <option value={data.id}>{data.nome}</option>
@@ -101,7 +110,8 @@ function Agendamentos() {
         </FormControl>
 
         <FormControl>
-        <DateTimePicker onChange={onChange} value={value} />
+            <FormLabel>Data e horário</FormLabel>
+            <DateTimePicker onChange={onChange} value={value} />
         </FormControl>
             
         {error && <div>Horário indisponível</div>}
