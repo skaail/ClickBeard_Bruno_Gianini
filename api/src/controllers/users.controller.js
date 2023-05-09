@@ -38,8 +38,8 @@ exports.login = async (req, res) => {
     )
 
     if(response.rowCount > 0){
-        const token = jwt.sign({role: response.rows[0].roles_id}, "tokendeautorizacaoadmin", {expiresIn: 6000})
-        res.status(200).send({auth: true, token, role: response.rows[0].roles_id})
+        const token = jwt.sign({role: response.rows[0].roles_id, user_id: response.rows[0].id}, "tokendeautorizacaoadmin", {expiresIn: 6000})
+        res.status(200).send({auth: true, token, role: response.rows[0].roles_id, user_id: response.rows[0].id})
     }else{
         res.status(500).send({message: "Credenciais não encontradas"})
     }

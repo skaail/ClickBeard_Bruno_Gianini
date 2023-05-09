@@ -1,0 +1,38 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  
+    
+  }
+
+  
+  
+  .form{
+    display: flex;
+    flex-direction: column;
+  
+    border-radius: 25px !important;
+  
+    background-color: #455561;
+  }
+  
+  .input{
+    border: solid 2px black;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 15px !important;
+  }
+  
+  .button{
+    background-color: #5C6672 !important;
+    width: 100% ;
+    border-radius: 25px !important;
+    height: 50px;
+    margin-top: 50px !important;
+  }
+  
+  .button:hover{
+    background-color: #31373d !important;
+  }

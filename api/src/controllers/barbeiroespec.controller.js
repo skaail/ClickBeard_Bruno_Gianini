@@ -12,3 +12,9 @@ exports.cadastrarEspecBarbeiro = async (req, res) => {
     })
 
 }
+
+exports.findBarbeiroByEspec = async (req, res) => {
+    const barbeiroId = parseInt(req.params.id)
+    const response = await db.query("SELECT Barbeiros.nome, Barbeiros.id FROM Barbeiros_Especialidades INNER JOIN barbeiros on barbeiros.id = Barbeiros_Especialidades.barbeiros_id INNER JOIN especialidades on especialidades.id = Barbeiros_Especialidades.especialidades_id WHERE especialidades_id = $1", [barbeiroId])
+    res.status(200).send(response.rows)
+}

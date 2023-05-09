@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
+import './login.css';
 
 
 function Login({setToken}) {
@@ -35,19 +36,20 @@ function Login({setToken}) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <p>Email</p>
-        <input type="text" onChange={e => setEmail(e.target.value)}/>
-      </label>
-      <label>
-        <p>Senha</p>
-        <input type="password" onChange={e => setPassword(e.target.value)}/>
-      </label>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <div className="login">
+      <form onSubmit={handleSubmit} className="form">
+        <label>
+          <input className="input" type="text" placeholder='Email' onChange={e => setEmail(e.target.value)}/>
+        </label>
+        <label>
+          <input className="input" type="password" placeholder='Senha' onChange={e => setPassword(e.target.value)}/>
+        </label>
+        <div>
+          <button className="button" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
   )
 }
 
