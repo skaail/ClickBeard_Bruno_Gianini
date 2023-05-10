@@ -5,6 +5,19 @@ ClickBeard usa Node.js para rodar e está dividido em 2 ambientes um de front e 
 
 Todas as comunicações com o banco e todas as autenticações são feitas pelo back end.
 
+#### Contas para teste
+
+```sh
+
+teste admin:
+email: admin@gmail.com
+senha: admin123
+
+teste cliente:
+email: usuario@gmail.com
+senha: usuario123
+```
+
 #### Installation
 
 
