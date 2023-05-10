@@ -3,6 +3,15 @@
 A conexão com o banco de dados é feita por uma API intermediadora.
 
 
+A API ultiliza de algumas bibliotecas adicionais
+- Express
+- Pg - conexão com o postgress
+- Nodemon - ambientes de testes
+- dotenv
+- cors
+- jsonwebtoken
+
+
 
 #### Banco de dados
 Para o banco de dados decidi ultilizar um servidor gratuito para hospeda-lo, usando o elephantsql eu consigo acessar o banco de qualquer lugar sem me preocupar com a compatibilidade do código em outras máquinas. A configuração do servidor está no arquivo /config/database.js
