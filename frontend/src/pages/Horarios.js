@@ -22,7 +22,8 @@ function Horarios() {
 }, [])
 
   return (
-    <div style={{display: 'flex', width: "100%", alignItems: 'flex-end', flexDirection: 'column'}}>
+    <div style={{display: 'flex', width: "100%", alignItems: 'center', flexDirection: 'column'}}>
+      <h1>Horários</h1>
       <div style={{padding: '15px', width: '100%'}}>
         <TableHorarios data = {data} headers = {headers} tipo = 'barbeiro'/>
       </div>

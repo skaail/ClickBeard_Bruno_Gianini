@@ -91,7 +91,11 @@ function Barbeiros() {
 
 return (
   <div style={{display: 'flex', width: "100%", alignItems: 'flex-end', flexDirection: 'column'}}>
+    <div style={{display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-around'}}>
+      <h1>Horários de hoje</h1>
       <Button onClick={onOpen} style={{margin: '15px'}} colorScheme='blue'>Adicionar</Button>
+    </div>
+
       <div style={{padding: '15px', width: '100%'}}>
         <TableNew data = {data} headers = {headers} tipo = 'barbeiro'/>
       </div>
