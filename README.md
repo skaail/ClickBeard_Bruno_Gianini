@@ -31,3 +31,8 @@ npm start
 #### Modelo do banco de dados
 
 ![Modelo Do Banco de Dados](https://user-images.githubusercontent.com/34845364/236713632-b7b40379-4bc8-4e81-b2b6-2605aab8478e.png)
+
+#### Diagrama de Entidades
+
+![Diagrama de Entidades](https://github.com/skaail/ClickBeard_Bruno_Gianini/assets/34845364/600cd04b-869c-446e-8f4c-c3b55f029885)
+
