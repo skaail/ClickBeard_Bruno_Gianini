@@ -12,7 +12,7 @@ Para rodar o ambiente do backend:
 ```sh
 cd api
 npm i
-npm  start
+npm run teste
 
 "o servidor está rodando na porta 3001 do host local"
 ```
