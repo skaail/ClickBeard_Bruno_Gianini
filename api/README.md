@@ -33,7 +33,7 @@ Usando o express criei rotas para a comunicação entre o servidor e o frontend,
 Usei o jwt para fazer a autenticação e proteção das rotas da minha api.
 
 Dentro do controlador de usuários eu tenho uma função de login que verifica as infomrações do usuário e retorna um token caso as informações forem válidas
-```
+```sh
 const token = jwt.sign(
 
     role: response.rows[0].roles_id, ##aqui eu guardo no token a role do usuário
@@ -48,7 +48,7 @@ Ao gerar o token com as infomações do usuário e a role eu consigo receber ess
 
 
 Para fazer está verificação eu uso um middleware que recebe o token e verifica se ele é valido, se sim ele retorna a função da rota
-```
+```sh
 
 /middleware/auth.js
 
