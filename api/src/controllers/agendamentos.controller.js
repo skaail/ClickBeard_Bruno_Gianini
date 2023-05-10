@@ -14,7 +14,12 @@ exports.agendar = async (req, res) => {
 }
 
 exports.getAgendamentos = async (req, res) => {
-    const response = await db.query("SELECT data, horario, usuarios.nome as cliente, barbeiros.nome as barbeiro FROM agendamentos INNER JOIN barbeiros ON barbeiros.id = agendamentos.barbeiros_id INNER JOIN usuarios ON usuarios .id = agendamentos.usuarios_id WHERE data > NOW()");
+    const response = await db.query("SELECT data, horario, usuarios.nome as cliente, barbeiros.nome as barbeiro FROM agendamentos INNER JOIN barbeiros ON barbeiros.id = agendamentos.barbeiros_id INNER JOIN usuarios ON usuarios .id = agendamentos.usuarios_id WHERE data <= NOW()");
+    res.status(200).send(response.rows);
+}
+
+exports.getAgendamentosToday = async (req, res) => {
+    const response = await db.query("SELECT data, horario, usuarios.nome as cliente, barbeiros.nome as barbeiro FROM agendamentos INNER JOIN barbeiros ON barbeiros.id = agendamentos.barbeiros_id INNER JOIN usuarios ON usuarios .id = agendamentos.usuarios_id WHERE data = CURRENT_DATE");
     res.status(200).send(response.rows);
 }
 
