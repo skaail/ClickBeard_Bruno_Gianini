@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O Frontend do aplicativo é feito com React.js e algumas bibliotecas adicionais
+- Chakra-UI
+- Bootstrap
+- Date-fns
+- JWT Decode
+- MUI
+- react-pro-sidebar
+- Router-Dom
 
-## Available Scripts
+## Sidebar
+Usando uma biblioteca já pronta fazemos a configuração da sidebar interativa, para isso temos que inserir o aplicativo dentro de um provider
 
-In the project directory, you can run:
+```sh
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { ChakraProvider } from '@chakra-ui/react'
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
-### `npm start`
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+root.render(
+    <ProSidebarProvider>
+        <App />
+    </ProSidebarProvider
+    );
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ChakraUI
 
-### `npm test`
+Para conseguirmos acessar os componentes da biblioteca do Chakra temos que inserir o aplicativo dentro de outro provider
+```sh
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { ChakraProvider } from '@chakra-ui/react'
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <ProSidebarProvider>
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
+  </ProSidebarProvider>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+);
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Autenticação
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+A autenticação dos usuários é feita por tokens JWT, ao fazer o login armazenamos o retorno do token nop localstorage`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+localStorage.setItem('token', JSON.stringify(token.token))
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+agora podemos usar o locastorage para receber o token em qualquer tela que vá usar ele para fazer uma requisição na API
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sh
+  useEffect(() => {
+    const tokenString = localStorage.getItem('token')
+    const userToken = JSON.parse(tokenString)
 
-## Learn More
+    setToken(userToken)
+  }, []);
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Agora podemos ultilizar o token no storage para receber as informações que passamos pela API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+jwt_decode(token).role ## Retorna a role guardada no token
+```
 
-### Code Splitting
+## Router
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Para fazer o gerenciamento das rotas usamos um Router para poder criar as rotas e linkar com as páginas necessárias
 
-### Analyzing the Bundle Size
+```sh
+<BrowserRouter className="Layout">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/barbeiros" element={<Barbeiros />} />
+            <Route path="/horarios" element={<Horarios />} />
+          </Routes>
+        </BrowserRouter>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Fetch
 
-### Making a Progressive Web App
+Para ultilizarmos a API usamos fetch dentro do React, passamos o token para a header x-access-token para conseguirmos usar a autenticação da API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```sh
+fetch('http://localhost:3001/api/barbeiros/', 
+    {headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': userToken}})
+          .then(response => response.json())
+          .then(data => setData(data))
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
